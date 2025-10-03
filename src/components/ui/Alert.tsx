@@ -1,5 +1,5 @@
 import React from 'react'
-import { AlertTriangle, CheckCircle, Info } from 'lucide-react'
+import { TriangleAlert as AlertTriangle, CircleCheck as CheckCircle, Info } from 'lucide-react'
 
 interface AlertProps {
   variant?: 'success' | 'error' | 'warning' | 'info'
