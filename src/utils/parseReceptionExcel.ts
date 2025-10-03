@@ -10,6 +10,7 @@ export interface ReceptionExcelRow {
   serviceName: string
   itemName: string
   workGroup: string
+  transactionType: string
 }
 
 interface RawExcelRow {
@@ -22,6 +23,7 @@ interface RawExcelRow {
   'Наименование услуги'?: string
   'Наименование позиции'?: string
   'Группа работ'?: string
+  'Тип транзакции'?: string
 }
 
 export const parseReceptionExcel = (
@@ -47,7 +49,8 @@ export const parseReceptionExcel = (
             row['Номер позиции'] == null ||
             !row['Наименование услуги'] ||
             !row['Наименование позиции'] ||
-            !row['Группа работ']
+            !row['Группа работ'] ||
+            !row['Тип транзакции']
           ) {
             console.warn(`Пропуск невалидной строки ${index + 2}:`, row)
             return null
@@ -71,6 +74,7 @@ export const parseReceptionExcel = (
             serviceName: String(row['Наименование услуги']),
             itemName: String(row['Наименование позиции']),
             workGroup: String(row['Группа работ']),
+            transactionType: String(row['Тип транзакции']),
           }
         })
         .filter((row): row is ReceptionExcelRow => row !== null)

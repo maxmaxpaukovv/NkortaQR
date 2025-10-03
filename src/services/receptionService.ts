@@ -127,6 +127,7 @@ export const saveReceptionData = async (rows: ReceptionExcelRow[]) => {
       accepted_motor_id: acceptedMotor.id,
       item_description: item.itemName,
       work_group: item.workGroup,
+      transaction_type: item.transactionType,
       quantity: 1,
       price: 0,
     }))
