@@ -2,8 +2,8 @@ import React from 'react'
 import { AlertTriangle, CheckCircle, Info } from 'lucide-react'
 
 interface AlertProps {
-  type: 'success' | 'error' | 'warning' | 'info'
-  message: string
+  variant?: 'success' | 'error' | 'warning' | 'info'
+  children: React.ReactNode
   className?: string
 }
 
@@ -21,9 +21,9 @@ const colorMap = {
   info: 'bg-blue-100 border-blue-400 text-blue-700',
 }
 
-export const Alert: React.FC<AlertProps> = ({ type, message, className = '' }) => {
-  const Icon = iconMap[type]
-  const colors = colorMap[type]
+export const Alert: React.FC<AlertProps> = ({ variant = 'info', children, className = '' }) => {
+  const Icon = iconMap[variant]
+  const colors = colorMap[variant]
 
   return (
     <div
@@ -31,7 +31,7 @@ export const Alert: React.FC<AlertProps> = ({ type, message, className = '' }) =
       role="alert"
     >
       <Icon className="w-5 h-5 flex-shrink-0 mt-0.5" />
-      <p className="text-sm font-medium">{message}</p>
+      <div className="text-sm font-medium">{children}</div>
     </div>
   )
 }
