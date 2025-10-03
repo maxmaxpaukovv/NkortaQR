@@ -18,7 +18,7 @@ export const saveReceptionData = async (rows: ReceptionExcelRow[]) => {
   const counterpartyName = firstRow.counterpartyName
   const receptionDate = firstRow.receptionDate
 
-  const { data: counterparty, error: counterpartyError } = await supabase
+  let { data: counterparty, error: counterpartyError } = await supabase
     .from('counterparties')
     .select('id')
     .eq('name', counterpartyName)
@@ -29,7 +29,21 @@ export const saveReceptionData = async (rows: ReceptionExcelRow[]) => {
   }
 
   if (!counterparty) {
-    throw new Error(`Контрагент "${counterpartyName}" не найден в справочнике`)
+    const { data: newCounterparty, error: createError } = await supabase
+      .from('counterparties')
+      .insert({
+        name: counterpartyName,
+        code: '',
+        contact_info: '',
+      })
+      .select()
+      .single()
+
+    if (createError) {
+      throw new Error(`Ошибка создания контрагента: ${createError.message}`)
+    }
+
+    counterparty = newCounterparty
   }
 
   const { data: reception, error: receptionError } = await supabase
@@ -64,7 +78,7 @@ export const saveReceptionData = async (rows: ReceptionExcelRow[]) => {
   )
 
   for (const group of motorGroupsArray) {
-    const { data: subdivision, error: subdivisionError } = await supabase
+    let { data: subdivision, error: subdivisionError } = await supabase
       .from('subdivisions')
       .select('id')
       .eq('name', group.subdivisionName)
@@ -77,9 +91,21 @@ export const saveReceptionData = async (rows: ReceptionExcelRow[]) => {
     }
 
     if (!subdivision) {
-      throw new Error(
-        `Подразделение "${group.subdivisionName}" не найдено в справочнике`
-      )
+      const { data: newSubdivision, error: createError } = await supabase
+        .from('subdivisions')
+        .insert({
+          name: group.subdivisionName,
+          code: '',
+          description: '',
+        })
+        .select()
+        .single()
+
+      if (createError) {
+        throw new Error(`Ошибка создания подразделения: ${createError.message}`)
+      }
+
+      subdivision = newSubdivision
     }
 
     const { data: acceptedMotor, error: motorError } = await supabase
