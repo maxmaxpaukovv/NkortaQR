@@ -23,13 +23,11 @@ export const CollapsibleHeader: React.FC<CollapsibleHeaderProps> = ({
 }) => (
   <div
     onClick={toggle}
-    className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all duration-200 ${className}`}
+    className={`flex items-center justify-between cursor-pointer transition-all duration-150 ${className}`}
   >
-    <div className="flex items-center space-x-3 flex-grow min-w-0">
-      {children}
-    </div>
-    <button className="text-gray-500 hover:text-indigo-600 flex-shrink-0">
-      {isExpanded ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
+    {children}
+    <button className="text-gray-600 hover:text-blue-600 flex-shrink-0 transition-colors ml-2">
+      {isExpanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
     </button>
   </div>
 )
@@ -45,18 +43,18 @@ export const FinancialTotals: React.FC<FinancialTotalsProps> = ({
   expense,
   profit,
 }) => (
-  <div className="flex items-center space-x-4 text-sm ml-auto flex-shrink-0">
-    <div className="flex items-center space-x-1 text-green-600 font-semibold">
-      <span className="text-xs text-gray-500 font-medium">Доходы:</span>
-      <span>{formatCurrency(income)}</span>
+  <div className="flex items-center space-x-3 text-sm ml-auto flex-shrink-0">
+    <div className="flex items-center space-x-1">
+      <span className="text-xs text-gray-600 font-medium">Д:</span>
+      <span className="text-green-700 font-semibold">{formatCurrency(income)}</span>
     </div>
-    <div className="flex items-center space-x-1 text-red-600 font-semibold">
-      <span className="text-xs text-gray-500 font-medium">Расходы:</span>
-      <span>{formatCurrency(expense)}</span>
+    <div className="flex items-center space-x-1">
+      <span className="text-xs text-gray-600 font-medium">Р:</span>
+      <span className="text-red-700 font-semibold">{formatCurrency(expense)}</span>
     </div>
-    <div className="flex items-center space-x-1 text-indigo-600 font-bold">
-      <span className="text-xs text-gray-500 font-medium">Прибыль:</span>
-      <span>{formatCurrency(profit)}</span>
+    <div className="flex items-center space-x-1">
+      <span className="text-xs text-gray-600 font-medium">П:</span>
+      <span className="text-blue-700 font-bold">{formatCurrency(profit)}</span>
     </div>
   </div>
 )

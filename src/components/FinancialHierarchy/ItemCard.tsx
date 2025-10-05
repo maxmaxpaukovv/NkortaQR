@@ -26,36 +26,31 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   }
 
   return (
-    <div className="bg-white p-3 rounded-lg border border-gray-200 flex justify-between items-center">
-      <div className="flex-grow flex items-center gap-2">
+    <div className="flex justify-between items-center py-1.5 hover:bg-gray-50 rounded transition-colors">
+      <div className="flex-grow flex items-center gap-2 min-w-0">
         <button
           onClick={() => onSelectMotor(item.id)}
-          className="text-gray-400 hover:text-indigo-600 transition-colors p-1 rounded-full hover:bg-indigo-50"
+          className="text-gray-400 hover:text-blue-600 transition-colors p-1 rounded-full hover:bg-blue-50 flex-shrink-0"
           title="Заменить позицию из справочника"
         >
           <Repeat size={14} />
         </button>
-        <div>
-          <p className="text-sm text-gray-800">{item.itemName}</p>
-          <p className="text-xs text-gray-500">
-            {formatCurrency(item.unitPrice)} / шт.
-          </p>
+        <div className="min-w-0 flex-grow">
+          <p className="text-sm text-gray-900 truncate">{item.itemName}</p>
         </div>
       </div>
-      <div className="flex items-center space-x-2 ml-4">
+      <div className="flex items-center gap-2 ml-4 flex-shrink-0">
+        <span className="text-sm text-gray-600">{item.quantity}</span>
         <Button
           variant="icon"
           size="sm"
           onClick={handleDecrement}
           disabled={item.quantity <= 1}
         >
-          <Minus size={16} />
+          <Minus size={14} />
         </Button>
-        <span className="w-10 text-center font-medium text-gray-800">
-          {item.quantity}
-        </span>
         <Button variant="icon" size="sm" onClick={handleIncrement}>
-          <Plus size={16} />
+          <Plus size={14} />
         </Button>
       </div>
     </div>

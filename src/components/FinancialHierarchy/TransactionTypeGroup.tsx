@@ -22,27 +22,27 @@ export const TransactionTypeGroup: React.FC<TransactionTypeGroupProps> = ({
 
   const isIncome = group.type === 'income'
   const headerColor = isIncome
-    ? 'bg-green-50 hover:bg-green-100'
-    : 'bg-red-50 hover:bg-red-100'
+    ? 'bg-green-50 hover:bg-green-100 border-green-300'
+    : 'bg-red-50 hover:bg-red-100 border-red-300'
   const textColor = isIncome ? 'text-green-800' : 'text-red-800'
 
   return (
-    <div className="ml-4">
+    <div>
       <CollapsibleHeader
         isExpanded={isExpanded}
         toggle={() => setIsExpanded(!isExpanded)}
-        className={headerColor}
+        className="py-1.5 px-2 hover:bg-gray-50 rounded"
       >
-        <h4 className={`text-sm font-semibold ${textColor}`}>
+        <h4 className={`text-sm ${textColor} flex-grow min-w-0`}>
           {isIncome ? 'Доходы' : 'Расходы'}
         </h4>
-        <span className={`text-sm font-bold ml-auto ${textColor}`}>
+        <span className={`text-sm font-semibold ${textColor}`}>
           {formatCurrency(group.totalAmount)}
         </span>
       </CollapsibleHeader>
 
       {isExpanded && (
-        <div className="pt-2 pl-4 border-l-2 border-gray-200 ml-2 space-y-2">
+        <div className="mt-1 space-y-1 pl-4">
           {group.items.map((item) => (
             <ItemCard
               key={item.id}

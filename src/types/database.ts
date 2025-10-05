@@ -339,6 +339,7 @@ export interface Database {
           total_expense: number | null
           total_income: number | null
           user_id: string
+          subdivision_id: string | null // Added
         }
         Insert: {
           counterparty_id: string
@@ -350,6 +351,7 @@ export interface Database {
           total_expense?: number | null
           total_income?: number | null
           user_id?: string
+          subdivision_id?: string | null // Added
         }
         Update: {
           counterparty_id?: string
@@ -361,6 +363,7 @@ export interface Database {
           total_expense?: number | null
           total_income?: number | null
           user_id?: string
+          subdivision_id?: string | null // Added
         }
         Relationships: [
           {
@@ -368,6 +371,13 @@ export interface Database {
             columns: ["counterparty_id"]
             isOneToOne: false
             referencedRelation: "counterparties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "upd_documents_subdivision_id_fkey" // Added
+            columns: ["subdivision_id"]
+            isOneToOne: false
+            referencedRelation: "subdivisions"
             referencedColumns: ["id"]
           },
           {
@@ -428,6 +438,7 @@ export interface Database {
           subdivision_id: string | null
           position_in_reception: number
           motor_service_description: string
+          motor_inventory_number: string | null // Added
           user_id: string
           created_at: string
         }
@@ -437,6 +448,7 @@ export interface Database {
           subdivision_id?: string | null
           position_in_reception: number
           motor_service_description: string
+          motor_inventory_number?: string | null // Added
           user_id?: string
           created_at?: string
         }
@@ -446,6 +458,7 @@ export interface Database {
           subdivision_id?: string | null
           position_in_reception?: number
           motor_service_description?: string
+          motor_inventory_number?: string | null // Added
           user_id?: string
           created_at?: string
         }
@@ -484,6 +497,7 @@ export interface Database {
           upd_document_id: string | null
           user_id: string
           created_at: string
+          transaction_type: string | null
         }
         Insert: {
           id?: string
@@ -495,6 +509,7 @@ export interface Database {
           upd_document_id?: string | null
           user_id?: string
           created_at?: string
+          transaction_type?: string | null
         }
         Update: {
           id?: string
@@ -506,6 +521,7 @@ export interface Database {
           upd_document_id?: string | null
           user_id?: string
           created_at?: string
+          transaction_type?: string | null
         }
         Relationships: [
           {

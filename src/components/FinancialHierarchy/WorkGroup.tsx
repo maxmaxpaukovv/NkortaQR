@@ -17,13 +17,13 @@ export const WorkGroup: React.FC<WorkGroupProps> = ({
   const [isExpanded, setIsExpanded] = useState(true)
 
   return (
-    <div className="border border-gray-200 rounded-lg">
+    <div className="border-l-4 border-blue-400 pl-4">
       <CollapsibleHeader
         isExpanded={isExpanded}
         toggle={() => setIsExpanded(!isExpanded)}
-        className="bg-indigo-50 hover:bg-indigo-100"
+        className="py-2 px-2 hover:bg-blue-50 rounded"
       >
-        <h2 className="text-base font-bold text-indigo-800">
+        <h2 className="text-sm font-medium text-gray-800 flex-grow min-w-0">
           {group.workGroup}
         </h2>
         <FinancialTotals
@@ -34,7 +34,7 @@ export const WorkGroup: React.FC<WorkGroupProps> = ({
       </CollapsibleHeader>
 
       {isExpanded && (
-        <div className="p-3 space-y-3">
+        <div className="mt-2 space-y-2 pl-4">
           {group.positions.map((pos) => (
             <PositionGroup
               key={pos.id}

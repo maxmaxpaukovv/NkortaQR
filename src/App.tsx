@@ -16,9 +16,11 @@ import { ResetPassword } from './pages/Auth/ResetPassword'
 
 // App Pages
 import { AcceptanceMode } from './pages/Acceptance/AcceptanceMode'
-import { NewAcceptance } from './pages/Acceptance/NewAcceptance' // Import new component
+import { NewAcceptance } from './pages/Acceptance/NewAcceptance'
 import { UPDAssemblyMode } from './pages/UPD/UPDAssemblyMode'
+import CreateUPD from './pages/UPD/CreateUPD'
 import { Archive } from './pages/Archive/Archive'
+import { EditReception } from './pages/Archive/EditReception'
 import { Settings } from './pages/Settings'
 import { Motors } from './pages/Reference/Motors'
 import { Counterparties } from './pages/Reference/Counterparties'
@@ -39,14 +41,21 @@ function App() {
           <Route path="/app" element={<ProtectedRoute />}>
             <Route index element={<Navigate to="acceptance" replace />} />
             <Route path="acceptance" element={<AcceptanceMode />} />
-            <Route path="acceptance/new" element={<NewAcceptance />} /> {/* New Route */}
+            <Route path="acceptance/new" element={<NewAcceptance />} />
             <Route path="upd-assembly" element={<UPDAssemblyMode />} />
             <Route path="archive" element={<Archive />} />
+            <Route path="archive/:receptionId" element={<EditReception />} />
             <Route path="settings" element={<Settings />} />
             {/* Reference Data */}
             <Route path="reference/motors" element={<Motors />} />
             <Route path="reference/counterparties" element={<Counterparties />} />
             <Route path="reference/subdivisions" element={<Subdivisions />} />
+          </Route>
+
+          {/* UPD Routes (outside app layout) */}
+          <Route path="/upd" element={<ProtectedRoute />}>
+            <Route index element={<UPDAssemblyMode />} />
+            <Route path="create" element={<CreateUPD />} />
           </Route>
 
           {/* Default Redirects */}
